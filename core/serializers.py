@@ -10,7 +10,7 @@ class FriendSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Friend
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'owner', 'has_overdue')
 
 
 class BelongingSerializer(serializers.ModelSerializer):

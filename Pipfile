@@ -6,6 +6,10 @@ name = "pypi"
 [packages]
 django = "*"
 djangorestframework = "*"
+ipython = "*"
+ipdb = "*"
+pendulum = "*"
+django-jet = "*"
 
 [dev-packages]
 
