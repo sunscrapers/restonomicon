@@ -1,3 +1,5 @@
+import django_filters
+import pendulum
 from rest_framework import viewsets
 
 from . import models
@@ -17,14 +19,22 @@ class BelongingViewset(viewsets.ModelViewSet):
     permission_classes = [IsOwner]
 
 
+class BorrowedFilterSet(django_filters.FilterSet):
+    missing = django_filters.BooleanFilter(field_name='returned', lookup_expr='isnull')
+    overdue = django_filters.BooleanFilter(method='get_overdue', field_name='returned')
+
+    class Meta:
+        model = models.Borrowed
+        fields = ['what', 'to_who', 'missing', 'overdue']
+
+    def get_overdue(self, queryset, field_name, value, ):
+        if value:
+            return queryset.filter(when__lte=pendulum.now().subtract(months=2))
+        return queryset
+
+
 class BorrowedViewset(viewsets.ModelViewSet):
     queryset = models.Borrowed.objects.all()
     serializer_class = serializers.BorrowedSerializer
     permission_classes = [IsOwner]
-
-    def get_queryset(self):
-        qs = super().get_queryset()
-        only_missing = str(self.request.query_params.get('missing')).lower()
-        if only_missing in ['true', '1']:
-            return qs.filter(returned__isnull=True)
-        return qs
+    filterset_class = BorrowedFilterSet
