@@ -22,6 +22,11 @@ class FriendQuerySet(models.QuerySet):
         )
 
 
+class BorrowedQuerySet(models.QuerySet):
+    def overdue(self):
+        return self.filter(when__lte=pendulum.now().subtract(months=2))
+
+
 class Friend(OwnedModel):
     name = models.CharField(max_length=100)
 
@@ -51,6 +56,8 @@ class Borrowed(OwnedModel):
     to_who = models.ForeignKey(Friend, on_delete=models.CASCADE)
     when = models.DateTimeField(auto_now_add=True)
     returned = models.DateTimeField(null=True, blank=True)
+
+    objects = BorrowedQuerySet.as_manager()
 
     def __str__(self):
         return f"{self.what} to {self.to_who}"
