@@ -27,9 +27,9 @@ class BorrowedFilterSet(django_filters.FilterSet):
         model = models.Borrowed
         fields = ['what', 'to_who', 'missing', 'overdue']
 
-    def get_overdue(self, queryset, field_name, value, ):
+    def get_overdue(self, queryset, field_name, value):
         if value:
-            return queryset.filter(when__lte=pendulum.now().subtract(months=2))
+            return queryset.overdue()
         return queryset
 
 
