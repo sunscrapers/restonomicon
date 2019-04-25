@@ -6,10 +6,12 @@ from rest_framework.response import Response
 
 from . import models
 from . import serializers
-from .permissions import IsOwner
+# from .permissions import IsOwner
+from rest_framework.permissions import AllowAny as IsOwner
+from rest_framework_extensions.mixins import NestedViewSetMixin
 
 
-class FriendViewset(viewsets.ModelViewSet):
+class FriendViewset(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = models.Friend.objects.with_overdue()
     serializer_class = serializers.FriendSerializer
     permission_classes = [IsOwner]
@@ -35,7 +37,7 @@ class BorrowedFilterSet(django_filters.FilterSet):
         return queryset
 
 
-class BorrowedViewset(viewsets.ModelViewSet):
+class BorrowedViewset(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = models.Borrowed.objects.all()
     serializer_class = serializers.BorrowedSerializer
     permission_classes = [IsOwner]
