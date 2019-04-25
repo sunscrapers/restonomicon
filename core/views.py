@@ -1,6 +1,8 @@
 import django_filters
-import pendulum
+from django.core.mail import send_mail
 from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 from . import models
 from . import serializers
@@ -38,3 +40,15 @@ class BorrowedViewset(viewsets.ModelViewSet):
     serializer_class = serializers.BorrowedSerializer
     permission_classes = [IsOwner]
     filterset_class = BorrowedFilterSet
+
+    @action(detail=True, url_path='remind', methods=['post'])
+    def remind_single(self, request, *args, **kwargs):
+        obj = self.get_object()
+        send_mail(
+            subject=f"Please return my belonging: {obj.what.name}",
+            message=f'You forgot to return my belonging: "{obj.what.name}"" that you borrowed on {obj.when}. Please return it.',
+            from_email="me@example.com",  # your email here
+            recipient_list=[obj.to_who.email],
+            fail_silently=False
+        )
+        return Response("Email sent.")
