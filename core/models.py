@@ -4,7 +4,9 @@ from django.db import models
 
 
 class OwnedModel(models.Model):
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True
+    )
 
     class Meta:
         abstract = True
@@ -14,10 +16,11 @@ class FriendQuerySet(models.QuerySet):
     def with_overdue(self):
         return self.annotate(
             ann_overdue=models.Case(
-                models.When(borrowed__when__lte=pendulum.now().subtract(months=2),
-                            then=True),
+                models.When(
+                    borrowed__when__lte=pendulum.now().subtract(months=2), then=True
+                ),
                 default=models.Value(False),
-                output_field=models.BooleanField()
+                output_field=models.BooleanField(),
             )
         )
 
@@ -29,7 +32,7 @@ class BorrowedQuerySet(models.QuerySet):
 
 class Friend(OwnedModel):
     name = models.CharField(max_length=100)
-    email = models.EmailField(default='')
+    email = models.EmailField(default="")
 
     objects = FriendQuerySet.as_manager()
 
@@ -38,7 +41,7 @@ class Friend(OwnedModel):
 
     @property
     def has_overdue(self):
-        if hasattr(self, 'ann_overdue'):
+        if hasattr(self, "ann_overdue"):
             return self.ann_overdue
         return self.borrowed_set.filter(  # 1
             returned__isnull=True, when__lte=pendulum.now().subtract(months=2)

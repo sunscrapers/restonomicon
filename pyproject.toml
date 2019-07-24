@@ -34,4 +34,5 @@ exclude = '''
 multi_line_output = 3
 include_trailing_comma = false
 line_length = 88
+known_first_party = ["core", "rental"]
 known_third_party = ["django", "django_filters", "pendulum", "rest_framework", "rest_framework_extensions"]
