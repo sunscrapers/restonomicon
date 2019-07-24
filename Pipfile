@@ -10,8 +10,10 @@ ipython = "*"
 ipdb = "*"
 pendulum = "*"
 django-jet = "*"
+black = "==19.3b0"
+pre-commit = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.6"
+python_version = "3.7"
