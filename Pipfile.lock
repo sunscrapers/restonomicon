@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f7189f91eefaf5c2f1dd8a173332aa64f7b5c2e4a5f4f78a842058a5e3ff7d75"
+            "sha256": "7234693fc24f4945cbe942a7ac867cc05860385c5ffe8530afd41c33e17959e7"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -95,6 +95,13 @@
             ],
             "index": "pypi",
             "version": "==3.10.1"
+        },
+        "drf-flex-fields": {
+            "hashes": [
+                "sha256:e3e19fb5711b38cd5cfc5428e24687502e72544f42b3bbe2438feb1f5d7991aa"
+            ],
+            "index": "pypi",
+            "version": "==0.5.0"
         },
         "identify": {
             "hashes": [
@@ -277,10 +284,10 @@
         },
         "virtualenv": {
             "hashes": [
-                "sha256:50e062b385b6e5fc6e5644ffe14e226550109a4c65e725b47ae7e3b978d320b5",
-                "sha256:fb528e20ecfce349de1dc2c8cbb394d1189b3f9507aea7273fbfb1c2167a4a4e"
+                "sha256:5fe3719f0185cc6d4e7ebb2d3b73bfadbebaaf0afa73fb312ec8b193ef8335b3",
+                "sha256:d0158c9784570aab78cbb1e4dc59938de128d38e20e5271d9997ada4b417012c"
             ],
-            "version": "==16.7.0"
+            "version": "==16.7.1"
         },
         "wcwidth": {
             "hashes": [

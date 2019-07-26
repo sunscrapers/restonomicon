@@ -8,40 +8,67 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Belonging',
+            name="Belonging",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
             ],
         ),
         migrations.CreateModel(
-            name='Borrowed',
+            name="Borrowed",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('when', models.DateTimeField(auto_now_add=True)),
-                ('returned', models.DateTimeField(blank=True, null=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("when", models.DateTimeField(auto_now_add=True)),
+                ("returned", models.DateTimeField(blank=True, null=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Friend',
+            name="Friend",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
             ],
         ),
         migrations.AddField(
-            model_name='borrowed',
-            name='to_who',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.Friend'),
+            model_name="borrowed",
+            name="to_who",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="core.Friend"
+            ),
         ),
         migrations.AddField(
-            model_name='borrowed',
-            name='what',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.Belonging'),
+            model_name="borrowed",
+            name="what",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="core.Belonging"
+            ),
         ),
     ]

@@ -8,7 +8,7 @@ from rest_framework.utils.urls import replace_query_param, remove_query_param
 class HeaderLimitOffsetPagination(LimitOffsetPagination):
     def paginate_queryset(self, queryset, request, view=None):
         self.use_envelope = False
-        if str(request.GET.get('envelope')).lower() in ['true', '1']:
+        if str(request.GET.get("envelope")).lower() in ["true", "1"]:
             self.use_envelope = True
         return super().paginate_queryset(queryset, request, view)
 
@@ -20,25 +20,30 @@ class HeaderLimitOffsetPagination(LimitOffsetPagination):
 
         links = []
         for label, url in (
-            ('first', first_url),
-            ('next', next_url),
-            ('previous', previous_url),
-            ('last', last_url),
+            ("first", first_url),
+            ("next", next_url),
+            ("previous", previous_url),
+            ("last", last_url),
         ):
             if url is not None:
                 links.append('<{}>; rel="{}"'.format(url, label))
 
-        headers = {'Link': ', '.join(links)} if links else {}
+        headers = {"Link": ", ".join(links)} if links else {}
 
         if self.use_envelope:
-            return Response(OrderedDict([
-                ('count', self.count),
-                ('first', first_url),
-                ('next', next_url),
-                ('previous', previous_url),
-                ('last', last_url),
-                ('results', data)
-            ]), headers=headers)
+            return Response(
+                OrderedDict(
+                    [
+                        ("count", self.count),
+                        ("first", first_url),
+                        ("next", next_url),
+                        ("previous", previous_url),
+                        ("last", last_url),
+                        ("results", data),
+                    ]
+                ),
+                headers=headers,
+            )
         return Response(data, headers=headers)
 
     def get_first_link(self):

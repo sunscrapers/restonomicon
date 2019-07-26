@@ -5,14 +5,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('core', '0002_auto_20180806_0653'),
-    ]
+    dependencies = [("core", "0002_auto_20180806_0653")]
 
     operations = [
         migrations.AddField(
-            model_name='friend',
-            name='email',
-            field=models.EmailField(default='', max_length=254),
-        ),
+            model_name="friend",
+            name="email",
+            field=models.EmailField(default="", max_length=254),
+        )
     ]

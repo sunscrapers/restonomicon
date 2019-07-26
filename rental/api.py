@@ -9,12 +9,12 @@ class NestedDefaultRouter(NestedRouterMixin, routers.DefaultRouter):
 
 
 router = NestedDefaultRouter()
-friends = router.register(r'friends', myapp_views.FriendViewset)
+friends = router.register(r"friends", myapp_views.FriendViewset)
 friends.register(
-    r'borrowings',
+    r"borrowings",
     myapp_views.BorrowedViewset,
-    base_name='friend-borrow',
-    parents_query_lookups=['to_who']
+    basename="friend-borrow",
+    parents_query_lookups=["to_who"],
 )
-router.register(r'belongings', myapp_views.BelongingViewset)
-router.register(r'borrowings', myapp_views.BorrowedViewset)
+router.register(r"belongings", myapp_views.BelongingViewset)
+router.register(r"borrowings", myapp_views.BorrowedViewset)
