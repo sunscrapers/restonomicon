@@ -1,6 +1,6 @@
 import django_filters
 from django.core.mail import send_mail
-from rest_framework import viewsets
+from dynamic_rest.viewsets import DynamicModelViewSet
 from rest_framework.decorators import action
 
 # from .permissions import IsOwner
@@ -11,13 +11,13 @@ from rest_framework_extensions.mixins import NestedViewSetMixin
 from . import models, serializers
 
 
-class FriendViewset(NestedViewSetMixin, viewsets.ModelViewSet):
+class FriendViewset(NestedViewSetMixin, DynamicModelViewSet):
     queryset = models.Friend.objects.with_overdue()
     serializer_class = serializers.FriendSerializer
     permission_classes = [IsOwner]
 
 
-class BelongingViewset(viewsets.ModelViewSet):
+class BelongingViewset(DynamicModelViewSet):
     queryset = models.Belonging.objects.all()
     serializer_class = serializers.BelongingSerializer
     permission_classes = [IsOwner]
@@ -37,7 +37,7 @@ class BorrowedFilterSet(django_filters.FilterSet):
         return queryset
 
 
-class BorrowedViewset(NestedViewSetMixin, viewsets.ModelViewSet):
+class BorrowedViewset(NestedViewSetMixin, DynamicModelViewSet):
     queryset = models.Borrowed.objects.all()
     serializer_class = serializers.BorrowedSerializer
     permission_classes = [IsOwner]

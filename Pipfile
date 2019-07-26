@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
+Django = "*"
 djangorestframework = "*"
 ipython = "*"
 ipdb = "*"
@@ -12,6 +12,10 @@ pendulum = "*"
 django-jet = "*"
 black = "==19.3b0"
 pre-commit = "*"
+dynamic-rest = "*"
+drf-extensions = "*"
+djoser = "*"
+django-filter = "*"
 
 [dev-packages]
 
