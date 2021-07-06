@@ -4,3 +4,10 @@ pendulum
 ipython
 ipdb
 
+Nie trzyma się to kupy co jest w tym linku. https://sunscrapers.com/blog/ultimate-tutorial-django-rest-framework-part-1/
+
+; cd your project’s directory and activate its virtualenv
+$ ./manage.py startapp rental
+$ pip install djangorestframework
+
+tworzy pliki zupełnie w innym szkielecie niż jest tutaj wstawione. Nie ma żadnej informacji w pliku co i jak po kolei zrobić, aby uzyskać strukturę jak z github, występuje problem z zainstalowaniem plikuów. Mam problem z pipfile-m. Czy pomoc w tej kwesti jestem w stanie od Cibie uzyskać? Byłbym wdzięczny. Ale nie wiem jak znaleźć pomoc, bo każdy profil na linkedin czy github lub yt nie ma odzewu. 
